@@ -5,7 +5,7 @@ Created on Sat Jan 10 08:31:15 2015
 @author: umesh
 """
 
-class Logic:
+class LogicGate:
     """" a logic gate has a label and an output"""
     def __init__(self,name):
         self.label = name
@@ -17,3 +17,19 @@ class Logic:
     def getOutput(self):
         self.output = self.performGateLogic() #a method for whom there is no code
         return(self.output)
+        
+class BinaryGate(LogicGate):
+    def __init__(self,n):
+        LogicGate.__init__(self,n)
+        self.pinA = None
+        self.pinB = None
+        
+    def getPinA(self):
+        aVal = input("Enter pinA input for " + self.getLabel() + ": " )
+        return(int(aVal))
+        
+    def getPinB(self):
+        bVal = input("Enter pinB input for " + self.getLabel() + ": " )
+        return int(bVal)
+        
+myAnd = BinaryGate('And1')        

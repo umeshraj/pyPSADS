@@ -30,13 +30,19 @@ class Fraction:
         bot = self.den*newFrac.den
         gcdNum = gcd(top, bot)
         resFrac = Fraction(top/gcdNum, bot/gcdNum)        
-        
         return(resFrac)
         
-    
-            
+    def __eq__(self, newFrac):
+        """ adding deep equality"""
+        #a/b = c/d implies ad = bc
+        left = self.num * newFrac.den
+        right = self.den * newFrac.num
+        return(left == right)
 
 myF1 = Fraction(3,5)
 myF2 = Fraction(4,5)
 myF3 = myF1 + myF2
-print(myF3)
+myF4 = Fraction(6,10)
+
+print(myF3) #test addition
+print(myF1 == myF4)

@@ -39,7 +39,19 @@ class UnaryGate(LogicGate):
         
     def getPin(self):
         pinVal = input("Enter pin input for " + self.getLabel() + ": ")
-        return(self.pinVal)
+        return(pinVal)
             
+            
+class AndGate(BinaryGate):
+    def __init__(self,n):
+        BinaryGate.__init__(self,n)
         
-myAnd = BinaryGate('And1')        
+    def performGateLogic(self):
+        a = self.getPinA()
+        b = self.getPinB()
+        return a * b
+             
+        
+a1 = AndGate("A1")
+andRes = a1.performGateLogic() 
+print "the result is ", andRes

@@ -43,14 +43,30 @@ class UnaryGate(LogicGate):
             
             
 class AndGate(BinaryGate):
+    """ AND gate functionality"""
     def __init__(self,n):
         BinaryGate.__init__(self,n)
         
     def performGateLogic(self):
         a = self.getPinA()
         b = self.getPinB()
-        return a * b
+        if (a == 1 and b==1):
+            return 1
+        else:
+            return 0
              
+class OrGate(BinaryGate):
+    def __init__(self,n):
+        BinaryGate.__init__(self,n)
+    
+    def performGateLogic(self):
+        a = self.getPinA()
+        b = self.getPinB()
+        if (a==0 and b==0):
+            return 0
+        else:
+            return 1
+        
         
 a1 = AndGate("A1")
 andRes = a1.performGateLogic() 

@@ -4,6 +4,13 @@ Created on Fri Jan  9 21:34:40 2015
 
 @author: umesh
 """
+def gcd(m,n):
+    """ function to find the greatest common divisor"""
+    if m%n == 0:
+        return n
+    else:
+        rem = m%n
+        return(gcd(n,rem))
 
 class Fraction:
     def __init__ (self, top, bottom):
@@ -17,18 +24,16 @@ class Fraction:
         return str(self.num) + "/" + str(self.den)
         
     def __add__(self, newFrac): 
+        """ overloading the + operator """
         #a/b + c/d = ad+bc/bd
         top = self.num * newFrac.den + newFrac.num*self.den
         bot = self.den*newFrac.den
-        resFrac = Fraction(top,bot)
+        gcdNum = gcd(top, bot)
+        resFrac = Fraction(top/gcdNum, bot/gcdNum)        
+        
         return(resFrac)
         
-    def gcd(m,n):
-        if m%n == 0:
-            return n
-        else:
-            rem = m%n
-            return(gcd(n,rem))
+    
             
 
 myF1 = Fraction(3,5)

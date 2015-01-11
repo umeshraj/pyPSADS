@@ -36,7 +36,7 @@ class BinaryGate(LogicGate):
         if self.pinB is None:
             bVal = input("Enter pinB input for " + self.getLabel() + ": ")
         else:
-            bVal= self.pinB.getFrom().getOutput() #get output of gate connector
+            bVal = self.pinB.getFrom().getOutput()  # get output of gate connector
         return int(bVal)
 
     def setNextPin(self, source):
@@ -97,9 +97,9 @@ class OrGate(BinaryGate):
             
 
 class NotGate(UnaryGate):
-    def __init__(self,n):
-        UnaryGate.__init__(self,n)
-    
+    def __init__(self, n):
+        UnaryGate.__init__(self, n)
+
     def performGateLogic(self):
         a = self.getPin()
         if (a == 1):
@@ -112,23 +112,23 @@ class Connector:
     def __init__(self, fGate, tGate):
         self.fromGate = fGate
         self.toGate = tGate
-        tGate.setNextPin(self) #connect next pin to this connector
+        tGate.setNextPin(self)  # connect next pin to this connector
 
     def getFrom(self):
         return(self.fromGate)
-        
+
     def getTo(self):
         return(self.toGate)
-        
-        
-a1 = AndGate("A1")
-andRes = a1.getOutput() 
-print "the result is ", andRes
 
-o1 = OrGate("O1")
-orRes = o1.getOutput()
-print "the result of the OR gate is: ", orRes
 
-n1 = NotGate("n1")
-notRes = n1.getOutput()
-print "the result of the NOT gate is: ", notRes
+def main():
+    g1 = AndGate("G1")
+    g2 = AndGate("G2")
+    g3 = OrGate("G3")
+    g4 = NotGate("G4")
+    c1 = Connector(g1, g3)
+    c2 = Connector(g2, g3)
+    c3 = Connector(g3, g4)
+    print(g4.getOutput())
+
+main()

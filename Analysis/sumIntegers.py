@@ -18,12 +18,23 @@ def sumOfN(n):
     return theSum, runTime
 
 
+def sumOfNEqn(n):
+    """ sum using equation"""
+    t0 = time()
+    theSum = n * (n+1) /2
+    runTime = time() - t0
+    return theSum, runTime
+
 def main():
     N = 10000
     for n in range(10, N+1, N/10):
         theSum, runTime = sumOfN(n)
-        print "Sum of %d integers is %d. Runtime %f s" %(n, theSum, runTime)    
+        print "Acc: Sum of %d integers is %d. Runtime %f s" %(n, theSum, runTime)    
 
+    for n in range(10, N+1, N/10):
+        theSum, runTime = sumOfNEqn(n)
+        print "Eqn: Sum of %d integers is %d. Runtime %f s" %(n, theSum, runTime)
+    
 
 main()
         

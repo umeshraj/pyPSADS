@@ -29,13 +29,48 @@ def anagramSolution1(str1, str2):
 
 def anagramSolution2(st1, str2):
     """ anagaram solution using sorted lists"""
-    list1 = list(str1).sort()
-    list2 = list(str2).sort()
+    list1 = list(str1)
+    list2 = list(str2)
+    
+    # sort the lists
+    list1.sort()    # or list1 = sorted(list1)
+    list2.sort()
     return (list1==list2)
+
+
+def str2Dict(inStr):
+    """ Function to count the number of times a character appears
+    in a string """
+
+    outDict = {}
+    for ch in inStr:  # for each character
+        outDict[ch] = outDict.get(ch, 0) + 1    # return 0 if key absent
+    return outDict
+
+
+def anagramSolution3(str1, str2):
+    dict1 = str2Dict(str1)
+    dict2 = str2Dict(str2)
+
+    foundAll = True
+    for key in dict1:
+        val1 = dict1.get(key)   # using get instead of [key] to get None
+        val2 = dict2.get(key, None)     # return None if key missing
+        if(val1 != val2):
+            foundAll = False
+            break
+    return foundAll
+
 
 str1 = 'abcd'
 str2 = 'abcd'
 str3 = 'aads'
 
 print(anagramSolution1(str1, str2))     # test anagram 1
+print(anagramSolution1(str1, str3))     # test anagram 1
+
 print(anagramSolution2(str1, str2))     # test anagram 2
+print(anagramSolution2(str1, str3))     # test anagram 2
+
+print(anagramSolution3(str1, str2))     # test anagram 3
+print(anagramSolution3(str1, str3))     # test anagram 3

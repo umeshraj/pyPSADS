@@ -19,8 +19,7 @@ class Stack:
         return(self.items[-1])
     
     def isEmpty():
-        stackLen = len(self.items)
-        return stackLen == 0
+        return self.items == []
     
     def size():
         return len(self.items)

@@ -12,12 +12,11 @@ def dec2bin(dec):
     base = 2
     quotient = dec
     s = Stack()  # to store remainders
-    while quotient >= base:
+    while quotient > 0:
         rem = quotient % base
         quotient = quotient//base
         s.push(rem)
-    s.push(quotient)
-
+        
     binStr = ''
     while not s.isEmpty():
         binStr = binStr + str(s.pop())
@@ -25,4 +24,4 @@ def dec2bin(dec):
     return binStr
 
 
-print dec2bin(2)
+print dec2bin(11)

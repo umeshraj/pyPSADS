@@ -17,6 +17,7 @@ def dec2bin(dec):
         quotient = quotient//base
         s.push(rem)
         
+    #  convert to string
     binStr = ''
     while not s.isEmpty():
         binStr = binStr + str(s.pop())

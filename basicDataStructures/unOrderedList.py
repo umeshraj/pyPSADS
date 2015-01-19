@@ -81,13 +81,13 @@ class UnorderedList:
             cur = cur.getNext()
         return " ".join(outStr)
             
-
-## testing
-myList = UnorderedList()
-myList.add(1)
-myList.add(10)
-print myList
-
-print(myList.search(-1))
-myList.remove(1)
-print(myList)
+if __name__ == "__main__":
+    ## testing
+    myList = UnorderedList()
+    myList.add(1)
+    myList.add(10)
+    print myList
+    
+    print(myList.search(-1))
+    myList.remove(1)
+    print(myList)

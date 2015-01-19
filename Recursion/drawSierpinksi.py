@@ -3,6 +3,8 @@
 Created on Mon Jan 19 12:59:58 2015
 
 @author: umesh
+
+topic url: http://interactivepython.org/runestone/static/pythonds/Recursion/pythondsSierpinskiTriangle.html
 """
 
 import turtle

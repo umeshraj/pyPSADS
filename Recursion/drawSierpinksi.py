@@ -7,18 +7,23 @@ Created on Mon Jan 19 12:59:58 2015
 
 import turtle
 
-def drawTriangle(triPoints, turt):
+def drawTriangle(triPoints, useColor, turt):
     """ function to draw a triangle given the 3 corners """
     p0 = triPoints[0]
     p1 = triPoints[1]
     p2 = triPoints[2]
 
     turt.up()  # don't draw
-    turt.goto(p0[0],p0[1])
-    turt.down()
+    turt.goto(p0[0],p0[1])  # reach the first point
+        
+    turt.down()  # get ready to color
+    turt.fillcolor(useColor)  
+    turt.begin_fill() # start coloring the inside of the triangle
     turt.goto(p1[0],p1[1])
     turt.goto(p2[0],p2[1])
     turt.goto(p0[0],p0[1])
+    turt.end_fill()  # finished coloring the inside of the triangle
+
 
 def getMidPoint(p1, p2):
     """function to get the mid points of two points p1, p2"""
@@ -28,10 +33,12 @@ def getMidPoint(p1, p2):
 
 def sierpinski(triPoints, order, turt):
     """ sierpinski triagle to draw 3 triangles """
+    colormap = ['blue','red','green','white','yellow',
+                'violet','orange']
     p0 = triPoints[0]
     p1 = triPoints[1]
     p2 = triPoints[2]
-    drawTriangle(triPoints, turt)
+    drawTriangle(triPoints, colormap[order], turt)
     if order > 0:
         #compute mid points of various pairs
         p01 = getMidPoint(p0, p1)

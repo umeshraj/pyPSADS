@@ -73,5 +73,5 @@ print(H[17])
 H[20] = 'duck'
 
 print(H.data)
-print([H.99])
+print(H[99])
 

@@ -9,6 +9,7 @@ URL: http://interactivepython.org/runestone/static/pythonds/SortSearch/TheMergeS
 def mergeSort(aList):
     """ implementing the merge-sort algorithm"""
     N = len(aList)
+    print "Splitting", aList
     if N > 1:
         midIdx = N//2
         leftArr = aList[:midIdx]
@@ -37,6 +38,7 @@ def mergeSort(aList):
             aList[k] = rightArr[j]
             j += 1
             k += 1
+    print "Merging", aList
 
 alist = [54,26,93,17,77,31,44,55,20]
 mergeSort(alist)

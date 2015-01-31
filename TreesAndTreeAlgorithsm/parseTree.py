@@ -8,6 +8,7 @@ URL: http://interactivepython.org/runestone/static/pythonds/Trees/ParseTree.html
 
 from binaryTree import BinaryTree
 from pythonds.basic.stack import Stack
+import operator  #standard operators as functions
 
 def buildParseTree(inString):
     tokList = inString.split()
@@ -37,9 +38,23 @@ def buildParseTree(inString):
             
     return pTree
         
-        
+
+def evaluateParseTree(parseTree):
+    operDict = {'+':operator.add, '-':operator.sub, '*':operator.mul, '/':operator.truediv}
+    
+    leftChild = parseTree.getLeftChild()
+    rightChild = parseTree.getRightChild()
+    if leftChild and rightChild:
+        fn = operDict[parseTree.getRootVal()]  # get the operator
+        return fn(evaluateParseTree(parseTree.getLeftChild()), \
+        evaluateParseTree(parseTree.getRightChild()))
+
+    else:
+        return parseTree.getRootVal()            
+            
 if __name__ == "__main__":
-    pt = buildParseTree("( ( 10 + 5 ) * 3 )")        
+    pt = buildParseTree("( ( 10 + 5 ) * 3 )")     
+    print evaluateParseTree(pt)
 
 
 

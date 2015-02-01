@@ -56,6 +56,8 @@ if __name__ == "__main__":
     pt = buildParseTree("( ( 10 + 5 ) * 3 )")     
     print evaluateParseTree(pt)
 
+    pt = buildParseTree("( 3 + ( 4 * 5 ) )")     
+    print evaluateParseTree(pt)
 
 
 

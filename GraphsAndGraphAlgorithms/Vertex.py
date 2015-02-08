@@ -12,6 +12,7 @@ class Vertex:
         self.connectedTo = {}
 
     def addNeighbor(self, nbrVertex, weight=0):
+        """ note i/p is a Vertex, not a key to a vertex"""
         self.connectedTo[nbrVertex] = weight
 
     def __str__(self):

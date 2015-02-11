@@ -11,7 +11,7 @@ class Graph:
     def __init__(self):
         self.vertList = {}  # stoe the keys to the various Verticies
         self.numVertices = 0
-        
+                
     def addVertex(self, vertexKey):
         newVertex = Vertex(vertexKey)
         self.numVertices += 1

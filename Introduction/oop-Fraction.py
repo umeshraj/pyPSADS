@@ -27,7 +27,8 @@ class Fraction:
     def __add__(self, new_frac):
         new_num = self.num*new_frac.den + self.den*new_frac.num
         new_den = self.den * new_frac.den
-        return Fraction(new_num, new_den)
+        gcd_val = gcd(new_num, new_den)
+        return Fraction(new_num//gcd_val, new_den//gcd_val)
 
 # testing the show/print functions
 myFrac = Fraction(3, 4)

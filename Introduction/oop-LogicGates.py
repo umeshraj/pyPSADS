@@ -58,7 +58,24 @@ class AndGate(BinaryGate):
             out = 0
         return out
 
+class OrGate(BinaryGate):
+    """ OR gate"""
+    def __init__(self, gate_label):
+        BinaryGate.__init__(self, gate_label)
+
+    def performGateLogic(self):
+        a = self.getPinA()
+        b = self.getPinB()
+        if a==0 and b==0:
+            out = 0
+        else:
+            out=1
+        return out
+
+
 if __name__ == "__main__":
     b = BinaryGate('ur')
-    g1 = AndGate("G1")
-    print(g1.getOutput())
+#    g1 = AndGate("G1")
+#    print(g1.getOutput())
+    g2 = OrGate("G2")
+    print(g2.getOutput())

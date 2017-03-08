@@ -2,133 +2,95 @@
 """
 Created on Sat Jan 10 08:31:15 2015
 
+Inheritance using Logic Gate example
+URL: https://goo.gl/AEpgFw
 @author: umesh
 """
 
-
 class LogicGate:
-    """" a logic gate has a label and an output"""
-    def __init__(self, name):
-        self.label = name
+    def __init__(self, gate_label):
+        self.label = gate_label
         self.output = None
-        
+
     def getLabel(self):
-        return(self.label)
-        
+        return self.label
+
     def getOutput(self):
-        self.output = self.performGateLogic() #a method for whom there is no code
-        return(self.output)
-        
+        self.output = self.performGateLogic()
+        return self.output
+
+
 class BinaryGate(LogicGate):
-    def __init__(self,n):
-        LogicGate.__init__(self,n)
+    def __init__(self, gate_label):
+        LogicGate.__init__(self, gate_label)
+
         self.pinA = None
         self.pinB = None
-        
+
     def getPinA(self):
-        if self.pinA is None:
-            aVal = input("Enter pinA input for " + self.getLabel() + ": ")
-        else: #a gate is connected to this
-            aVal = self.pinA.getFrom().getOutput() #get output of gate connected to this pin
-        return(int(aVal))
+        return int(input("Enter Pin A input for gate "+ self.getLabel() + "-->"))
 
     def getPinB(self):
-        if self.pinB is None:
-            bVal = input("Enter pinB input for " + self.getLabel() + ": ")
-        else:
-            bVal = self.pinB.getFrom().getOutput()  # get output of gate connector
-        return int(bVal)
-
-    def setNextPin(self, source):
-        """ attach a gate to this pin"""
-        if self.pinA is None:
-            self.pinA = source
-        else:
-            if self.pinB is None:
-                self.pinB = source
-            else:
-                raise RuntimeError("Non empty pins!!")
+        return int(input("Enter Pin B input for gate "+ self.getLabel() + "-->"))
 
 
 class UnaryGate(LogicGate):
-    def __init__(self, n):
-        LogicGate.__init__(self, n)
+    """ Class for unary gate"""
+    def __init__(self, gate_label):
+        LogicGate.__init__(self, gate_label)
+
         self.pin = None
 
     def getPin(self):
-        if self.pin is None:
-            pinVal = input("Enter pin input for " + self.getLabel() + ": ")
-        else:
-            pinVal = self.pin.getFrom().getOutput()   # output from connector
-        return(pinVal)
-
-    def setNextPin(self, source):
-        if self.pin is None:
-            self.pin = source
-        else:
-            raise RuntimeError("Non empty pin!")
+        return int(input("Enter Pin input for gate "+ self.getLabel()+"-->"))
 
 
 class AndGate(BinaryGate):
-    """ AND gate functionality"""
-    def __init__(self, n):
-        BinaryGate.__init__(self, n)
+    def __init__(self, gate_label):
+        BinaryGate.__init__(self, gate_label)
 
     def performGateLogic(self):
         a = self.getPinA()
         b = self.getPinB()
-        if (a == 1 and b == 1):
-            return 1
+        if a==1 and b == 1:
+            out = 1
         else:
-            return 0
-
+            out = 0
+        return out
 
 class OrGate(BinaryGate):
-    def __init__(self, n):
-        BinaryGate.__init__(self, n)
+    """ OR gate"""
+    def __init__(self, gate_label):
+        BinaryGate.__init__(self, gate_label)
 
     def performGateLogic(self):
         a = self.getPinA()
         b = self.getPinB()
-        if (a == 0 and b == 0):
-            return 0
+        if a==0 and b==0:
+            out = 0
         else:
-            return 1
-            
+            out=1
+        return out
+
 
 class NotGate(UnaryGate):
-    def __init__(self, n):
-        UnaryGate.__init__(self, n)
+    def __init__(self, gate_label):
+        UnaryGate.__init__(self, gate_label)
 
     def performGateLogic(self):
         a = self.getPin()
-        if (a == 1):
-            return 0
+        if a == 0:
+            out = 1
         else:
-            return 1
+            out = 0
+        return out
 
 
-class Connector:
-    def __init__(self, fGate, tGate):
-        self.fromGate = fGate
-        self.toGate = tGate
-        tGate.setNextPin(self)  # connect next pin to this connector
-
-    def getFrom(self):
-        return(self.fromGate)
-
-    def getTo(self):
-        return(self.toGate)
-
-
-def main():
-    g1 = AndGate("G1")
-    g2 = AndGate("G2")
-    g3 = OrGate("G3")
-    g4 = NotGate("G4")
-    c1 = Connector(g1, g3)
-    c2 = Connector(g2, g3)
-    c3 = Connector(g3, g4)
-    print(g4.getOutput())
-
-main()
+if __name__ == "__main__":
+    b = BinaryGate('ur')
+#    g1 = AndGate("G1")
+#    print(g1.getOutput())
+#    g2 = OrGate("G2")
+#    print(g2.getOutput())
+    g3 = NotGate("G3")
+    print(g3.getOutput())

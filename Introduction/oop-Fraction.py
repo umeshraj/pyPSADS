@@ -1,48 +1,51 @@
 # -*- coding: utf-8 -*-
 """
 Created on Fri Jan  9 21:34:40 2015
-
+Making a Fraction class: https://goo.gl/YJ5Sjw
 @author: umesh
 """
-def gcd(m,n):
-    """ function to find the greatest common divisor"""
-    if m%n == 0:
-        return n
-    else:
-        rem = m%n
-        return(gcd(n,rem))
+
+
+def gcd(m, n):
+    """ greatest common divisor of two positive integers"""
+    while (m%n !=0):
+        m, n = n, m%n
+    return n
 
 class Fraction:
-    def __init__ (self, top, bottom):
-        self.num = top
-        self.den = bottom
-    
+    def __init__(self, num, den):
+        self.num = num
+        self.den = den
+
     def show(self):
-        print ("%d/%d") %(self.num, self.den)
-    
+        print("{0}/{1}".format(self.num, self.den))
+
     def __str__(self):
-        return str(self.num) + "/" + str(self.den)
-        
-    def __add__(self, newFrac): 
-        """ overloading the + operator """
-        #a/b + c/d = ad+bc/bd
-        top = self.num * newFrac.den + newFrac.num*self.den
-        bot = self.den*newFrac.den
-        gcdNum = gcd(top, bot)
-        resFrac = Fraction(top/gcdNum, bot/gcdNum)        
-        return(resFrac)
-        
-    def __eq__(self, newFrac):
-        """ adding deep equality"""
-        #a/b = c/d implies ad = bc
-        left = self.num * newFrac.den
-        right = self.den * newFrac.num
-        return(left == right)
+        out_str = "{0}/{1}".format(self.num, self.den)
+        return out_str
 
-myF1 = Fraction(3,5)
-myF2 = Fraction(4,5)
-myF3 = myF1 + myF2
-myF4 = Fraction(6,10)
+    def __add__(self, new_frac):
+        new_num = self.num*new_frac.den + self.den*new_frac.num
+        new_den = self.den * new_frac.den
+        gcd_val = gcd(new_num, new_den)
+        return Fraction(new_num//gcd_val, new_den//gcd_val)
 
-print(myF3) #test addition
-print(myF1 == myF4)
+    def __eq__(self, frac2):
+        val1 = self.num * frac2.den
+        val2 = self.den * frac2.num
+        return val1 == val2
+
+# testing the show/print functions
+myFrac = Fraction(3, 4)
+myFrac.show()
+print("I ate {0} of my pizza".format(myFrac))
+
+# adding fractions
+f1=Fraction(1,4)
+f2=Fraction(1,2)
+f3=f1+f2
+print(f3)
+
+# check equality
+f3 = Fraction(4, 16)
+print(f1 == f3)

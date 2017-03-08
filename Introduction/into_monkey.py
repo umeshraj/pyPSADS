@@ -17,7 +17,8 @@ def mkRandomStr(str_len):
     alphas = string.ascii_lowercase + ' '
     alphas_len = len(alphas)
     for idx in range(str_len):
-        out = out + alphas[random.randint(0, alphas_len)]
+        rand_idx = random.randint(0, alphas_len-1)
+        out = out + alphas[rand_idx]
     return out
 
 def score(goalStr, testStr):

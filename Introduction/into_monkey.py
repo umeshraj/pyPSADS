@@ -20,3 +20,12 @@ def mkRandomStr(str_len):
         out = out + alphas[random.randint(0, alphas_len)]
     return out
 
+def score(goalStr, testStr):
+    """ compute the similarity between goalStr and testStr"""
+    score = 0
+    for idx in range(len(goalStr)):
+        if goalStr[idx] == testStr[idx]:
+            score += 1
+    score = score/len(goalStr)
+    return score
+

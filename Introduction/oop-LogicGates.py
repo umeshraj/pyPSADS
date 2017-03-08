@@ -9,12 +9,28 @@ URL: https://goo.gl/AEpgFw
 
 class LogicGate:
     def __init__(self, gate_label):
-        self.label = gate_labe
+        self.label = gate_label
         self.output = None
 
     def getLabel(self):
-        return self.label()
+        return self.label
 
     def getOutput(self):
         self.output = self.performGateLogic()
         return self.output
+
+
+class BinaryGate(LogicGate):
+    def __init__(self, gate_label):
+        LogicGate.__init__(self, gate_label)
+
+        self.pinA = None
+        self.pinB = None
+
+    def getPinA(self):
+        return int(input("Enter Pin A input for gate "+ self.getLabel()+"-->"))
+
+    def getPinB(self):
+        return int(input("Enter Pin B input for gate "+ self.getLabel()+"-->"))
+
+b = BinaryGate('ur')

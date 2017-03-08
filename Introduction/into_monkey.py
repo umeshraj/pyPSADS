@@ -30,3 +30,17 @@ def score(goalStr, testStr):
     score = score/len(goalStr)
     return score
 
+def main():
+    goal_str = 'methinks it is like a weasel'
+    best_score = 0
+    new_str = mkRandomStr(str_len=28)
+    new_score = score(goal_str, new_str)
+    while  new_score < 1:
+        if new_score > best_score:
+            best_score = new_score
+            print("{0:0.2f}: {1}".format(new_score, new_str))
+        new_str = mkRandomStr(str_len=28)
+        new_score = score(goal_str, new_str)
+
+if __name__ == "__main__":
+    main()

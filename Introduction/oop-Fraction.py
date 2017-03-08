@@ -5,6 +5,13 @@ Making a Fraction class: https://goo.gl/YJ5Sjw
 @author: umesh
 """
 
+
+def gcd(m, n):
+    """ greatest common divisor of two positive integers"""
+    while (m%n !=0):
+        m, n = n, m%n
+    return n
+
 class Fraction:
     def __init__(self, num, den):
         self.num = num

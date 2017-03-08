@@ -30,6 +30,11 @@ class Fraction:
         gcd_val = gcd(new_num, new_den)
         return Fraction(new_num//gcd_val, new_den//gcd_val)
 
+    def __eq__(self, frac2):
+        val1 = self.num * frac2.den
+        val2 = self.den * frac2.num
+        return val1 == val2
+
 # testing the show/print functions
 myFrac = Fraction(3, 4)
 myFrac.show()
@@ -40,3 +45,7 @@ f1=Fraction(1,4)
 f2=Fraction(1,2)
 f3=f1+f2
 print(f3)
+
+# check equality
+f3 = Fraction(4, 16)
+print(f1 == f3)

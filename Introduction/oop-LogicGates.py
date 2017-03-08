@@ -73,9 +73,24 @@ class OrGate(BinaryGate):
         return out
 
 
+class NotGate(UnaryGate):
+    def __init__(self, gate_label):
+        UnaryGate.__init__(self, gate_label)
+
+    def performGateLogic(self):
+        a = self.getPin()
+        if a == 0:
+            out = 1
+        else:
+            out = 0
+        return out
+
+
 if __name__ == "__main__":
     b = BinaryGate('ur')
 #    g1 = AndGate("G1")
 #    print(g1.getOutput())
-    g2 = OrGate("G2")
-    print(g2.getOutput())
+#    g2 = OrGate("G2")
+#    print(g2.getOutput())
+    g3 = NotGate("G3")
+    print(g3.getOutput())

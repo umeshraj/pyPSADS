@@ -1,68 +1,46 @@
 # -*- coding: utf-8 -*-
 """
 Created on Fri Jan  9 07:59:11 2015
-
+https://goo.gl/WPqpse
 @author: umesh
 """
 
 #function to simulate monkeys writing shakespeare
 #make a random string  “this is a test of abcd”
 
+import string
 import random
 
-def mkRandString(strLen):
-    """ generate a random string of length strLen """
-    alphabet = 'abcdefghijklmnopqrstuvwxyz '
-    NAlpha = len(alphabet)
-    outStr = ''
-    for i in range(strLen):
-        outStr = outStr+alphabet[random.randrange(NAlpha)]
-        
-    return outStr
+def mkRandomStr(str_len):
+    """ make a random string of length str_len"""
+    out = ""
+    alphas = string.ascii_lowercase + ' '
+    alphas_len = len(alphas)
+    for idx in range(str_len):
+        rand_idx = random.randint(0, alphas_len-1)
+        out = out + alphas[rand_idx]
+    return out
 
-def updateRandString(goalString, thisString):
-    """keep characters that match. change only 1 char"""
-    if (goalString == thisString):
-        return
-    else:
-        NGoal = len(goalString)
-        #get a set of indicies that don't match
-        mismatchIdx = []
-        for i in range(NGoal):
-            if (goalString[i] != thisString[i]):
-                mismatchIdx.append(i)
-                
-        #randomly pick one of these mismatch idx and change
-        Nmismatch = len(mismatchIdx)
-        randomNum = random.randrange(Nmismatch)
-        pickIdx = mismatchIdx[randomNum]
-        
-        #replace element in string by converting to list and back to string
-        tmpList = list(thisString)
-        tmpList[pickIdx] = mkRandString(1) #generate a random letter
-        outStr = "".join(tmpList) #join the list back to a string
-    return outStr
-
-def score(goalString, thisString):
-    NGoal = len(goalString)
+def score(goalStr, testStr):
+    """ compute the similarity between goalStr and testStr"""
     score = 0
-    for i in range(NGoal):
-        if goalString[i] == thisString[i]:
-            score = score+1
-    return float(score)/NGoal * 100
+    for idx in range(len(goalStr)):
+        if goalStr[idx] == testStr[idx]:
+            score += 1
+    score = score/len(goalStr)
+    return score
 
 def main():
-    goalString = 'this is a test of abcd'
-    NGoal = len(goalString)
-    
-    bestScore = 0
-    curStr = mkRandString(NGoal)
-    while bestScore < 100:        
-        curStr = updateRandString(goalString, curStr)
-        curScore = score(goalString, curStr)       
-        
-        if curScore > bestScore:
-            bestScore = curScore
-            print ('%s :  %3.1f') %(curStr, curScore)
-    
-main()
+    goal_str = 'methinks it is like a weasel'
+    best_score = 0
+    new_str = mkRandomStr(str_len=28)
+    new_score = score(goal_str, new_str)
+    while  new_score < 1:
+        if new_score > best_score:
+            best_score = new_score
+            print("{0:0.2f}: {1}".format(new_score, new_str))
+        new_str = mkRandomStr(str_len=28)
+        new_score = score(goal_str, new_str)
+
+if __name__ == "__main__":
+    main()

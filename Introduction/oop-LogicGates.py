@@ -28,10 +28,25 @@ class BinaryGate(LogicGate):
         self.pinB = None
 
     def getPinA(self):
-        return int(input("Enter Pin A input for gate "+ self.getLabel() + "-->"))
+        if self.pinA is None:
+            return int(input("Enter Pin A input for gate "+ self.getLabel() + "-->"))
+        else:
+            return self.pinA.getFrom().getOutput()
 
     def getPinB(self):
-        return int(input("Enter Pin B input for gate "+ self.getLabel() + "-->"))
+        if self.pinB is None:
+            return int(input("Enter Pin B input for gate "+ self.getLabel() + "-->"))
+        else:
+            return self.pinB.getFrom().getOutput()
+
+    def setNextPin(self, source):
+        """ set next available pin"""
+        if self.pinA is None:
+            self.pinA = source
+        elif self.pinB is None:
+            self.pinB = source
+        else:
+            raise RuntimeError('Error: NO EMPTY PINS')
 
 
 class UnaryGate(LogicGate):
@@ -42,7 +57,16 @@ class UnaryGate(LogicGate):
         self.pin = None
 
     def getPin(self):
-        return int(input("Enter Pin input for gate "+ self.getLabel()+"-->"))
+        if self.pin is None:
+            return int(input("Enter Pin input for gate "+ self.getLabel()+"-->"))
+        else:
+            return self.pin.getFrom().getOutput()
+
+    def setNextPin(self, source):
+        if self.pin is None:
+            self.pin = source
+        else:
+            raise RuntimeError('Error: NO EMPTY PIN')
 
 
 class AndGate(BinaryGate):
@@ -85,12 +109,25 @@ class NotGate(UnaryGate):
             out = 0
         return out
 
+class Connector:
+    def __init__(self, fgate, tgate):
+        self.fromgate = fgate
+        self.togate = tgate
+        tgate.setNextPin(self)
+
+    def getFrom(self):
+        return self.fromgate
+
+    def getTo(self):
+        return self.togate
+
 
 if __name__ == "__main__":
-    b = BinaryGate('ur')
-#    g1 = AndGate("G1")
-#    print(g1.getOutput())
-#    g2 = OrGate("G2")
-#    print(g2.getOutput())
-    g3 = NotGate("G3")
-    print(g3.getOutput())
+    g1 = AndGate("G1")
+    g2 = AndGate("G2")
+    g3 = OrGate("G3")
+    g4 = NotGate("G4")
+    c1 = Connector(g1, g3)
+    c2 = Connector(g2, g3)
+    c3 = Connector(g3, g4)
+    print(g4.getOutput())

@@ -12,12 +12,12 @@ def palchecker(inString):
     for ch in inString:
         d.addRear(ch)
 
-    isPalin = True    
+    isPalin = True
     while d.size() >=2 and isPalin:
         isPalin = d.removeFront() == d.removeRear()  # check if front = rear
-    
+
     return isPalin
-    
+
 print(palchecker("lsdkjfskf"))
 print(palchecker("radar"))
-        
+print(palchecker('r'))
